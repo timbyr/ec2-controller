@@ -13,6 +13,14 @@ rules:
 
   - internetgateways
 
+  - launchtemplates
+
+  - launchtemplateversions
+
+  - natgateways
+
+  - networkacls
+
   - routetables
 
   - securitygroups
@@ -24,6 +32,8 @@ rules:
   - vpcs
 
   - vpcendpoints
+
+  - vpcendpointserviceconfigurations
 
   verbs:
   - create
@@ -38,12 +48,17 @@ rules:
   resources:
   - dhcpoptions
   - internetgateways
+  - launchtemplates
+  - launchtemplateversions
+  - natgateways
+  - networkacls
   - routetables
   - securitygroups
   - subnets
   - transitgateways
   - vpcs
   - vpcendpoints
+  - vpcendpointserviceconfigurations
   verbs:
   - get
   - patch

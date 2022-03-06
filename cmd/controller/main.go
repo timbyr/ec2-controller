@@ -35,12 +35,17 @@ import (
 
 	_ "github.com/aws-controllers-k8s/ec2-controller/pkg/resource/dhcp_options"
 	_ "github.com/aws-controllers-k8s/ec2-controller/pkg/resource/internet_gateway"
+	_ "github.com/aws-controllers-k8s/ec2-controller/pkg/resource/launch_template"
+	_ "github.com/aws-controllers-k8s/ec2-controller/pkg/resource/launch_template_version"
+	_ "github.com/aws-controllers-k8s/ec2-controller/pkg/resource/nat_gateway"
+	_ "github.com/aws-controllers-k8s/ec2-controller/pkg/resource/network_acl"
 	_ "github.com/aws-controllers-k8s/ec2-controller/pkg/resource/route_table"
 	_ "github.com/aws-controllers-k8s/ec2-controller/pkg/resource/security_group"
 	_ "github.com/aws-controllers-k8s/ec2-controller/pkg/resource/subnet"
 	_ "github.com/aws-controllers-k8s/ec2-controller/pkg/resource/transit_gateway"
 	_ "github.com/aws-controllers-k8s/ec2-controller/pkg/resource/vpc"
 	_ "github.com/aws-controllers-k8s/ec2-controller/pkg/resource/vpc_endpoint"
+	_ "github.com/aws-controllers-k8s/ec2-controller/pkg/resource/vpc_endpoint_service_configuration"
 )
 
 var (

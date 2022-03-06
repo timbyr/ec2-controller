@@ -1,0 +1,220 @@
+
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.7.0
+  creationTimestamp: null
+  name: natgateways.ec2.services.k8s.aws
+spec:
+  group: ec2.services.k8s.aws
+  names:
+    kind: NATGateway
+    listKind: NATGatewayList
+    plural: natgateways
+    singular: natgateway
+  scope: Namespaced
+  versions:
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: NATGateway is the Schema for the NATGateways API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: "NatGatewaySpec defines the desired state of NatGateway.
+              \n Describes a NAT gateway."
+            properties:
+              allocationID:
+                description: '[Public NAT gateways only] The allocation ID of an Elastic
+                  IP address to associate with the NAT gateway. You cannot specify
+                  an Elastic IP address with a private NAT gateway. If the Elastic
+                  IP address is associated with another resource, you must first disassociate
+                  it.'
+                type: string
+              clientToken:
+                description: "Unique, case-sensitive identifier that you provide to
+                  ensure the idempotency of the request. For more information, see
+                  How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+                  \n Constraint: Maximum 64 ASCII characters."
+                type: string
+              connectivityType:
+                description: Indicates whether the NAT gateway supports public or
+                  private connectivity. The default is public connectivity.
+                type: string
+              subnetID:
+                description: The subnet in which to create the NAT gateway.
+                type: string
+              tagSpecifications:
+                description: The tags to assign to the NAT gateway.
+                items:
+                  description: The tags to apply to a resource when the resource is
+                    being created.
+                  properties:
+                    resourceType:
+                      type: string
+                    tags:
+                      items:
+                        description: Describes a tag.
+                        properties:
+                          key:
+                            type: string
+                          value:
+                            type: string
+                        type: object
+                      type: array
+                  type: object
+                type: array
+            required:
+            - subnetID
+            type: object
+          status:
+            description: NATGatewayStatus defines the observed state of NATGateway
+            properties:
+              ackResourceMetadata:
+                description: All CRs managed by ACK have a common `Status.ACKResourceMetadata`
+                  member that is used to contain resource sync state, account ownership,
+                  constructed ARN for the resource
+                properties:
+                  arn:
+                    description: 'ARN is the Amazon Resource Name for the resource.
+                      This is a globally-unique identifier and is set only by the
+                      ACK service controller once the controller has orchestrated
+                      the creation of the resource OR when it has verified that an
+                      "adopted" resource (a resource where the ARN annotation was
+                      set by the Kubernetes user on the CR) exists and matches the
+                      supplied CR''s Spec field values. TODO(vijat@): Find a better
+                      strategy for resources that do not have ARN in CreateOutputResponse
+                      https://github.com/aws/aws-controllers-k8s/issues/270'
+                    type: string
+                  ownerAccountID:
+                    description: OwnerAccountID is the AWS Account ID of the account
+                      that owns the backend AWS service API resource.
+                    type: string
+                required:
+                - ownerAccountID
+                type: object
+              conditions:
+                description: All CRS managed by ACK have a common `Status.Conditions`
+                  member that contains a collection of `ackv1alpha1.Condition` objects
+                  that describe the various terminal states of the CR and its backend
+                  AWS service API resource
+                items:
+                  description: Condition is the common struct used by all CRDs managed
+                    by ACK service controllers to indicate terminal states  of the
+                    CR and its backend AWS service API resource
+                  properties:
+                    lastTransitionTime:
+                      description: Last time the condition transitioned from one status
+                        to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: A human readable message indicating details about
+                        the transition.
+                      type: string
+                    reason:
+                      description: The reason for the condition's last transition.
+                      type: string
+                    status:
+                      description: Status of the condition, one of True, False, Unknown.
+                      type: string
+                    type:
+                      description: Type is the type of the Condition
+                      type: string
+                  required:
+                  - status
+                  - type
+                  type: object
+                type: array
+              natGateway:
+                description: Information about the NAT gateway.
+                properties:
+                  connectivityType:
+                    type: string
+                  createTime:
+                    format: date-time
+                    type: string
+                  deleteTime:
+                    format: date-time
+                    type: string
+                  failureCode:
+                    type: string
+                  failureMessage:
+                    type: string
+                  natGatewayAddresses:
+                    items:
+                      description: Describes the IP addresses and network interface
+                        associated with a NAT gateway.
+                      properties:
+                        allocationID:
+                          type: string
+                        networkInterfaceID:
+                          type: string
+                        privateIP:
+                          type: string
+                        publicIP:
+                          type: string
+                      type: object
+                    type: array
+                  natGatewayID:
+                    type: string
+                  provisionedBandwidth:
+                    description: Reserved. If you need to sustain traffic greater
+                      than the documented limits (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html),
+                      contact us through the Support Center (https://console.aws.amazon.com/support/home?).
+                    properties:
+                      provisionTime:
+                        format: date-time
+                        type: string
+                      provisioned:
+                        type: string
+                      requestTime:
+                        format: date-time
+                        type: string
+                      requested:
+                        type: string
+                      status:
+                        type: string
+                    type: object
+                  state:
+                    type: string
+                  subnetID:
+                    type: string
+                  tags:
+                    items:
+                      description: Describes a tag.
+                      properties:
+                        key:
+                          type: string
+                        value:
+                          type: string
+                      type: object
+                    type: array
+                  vpcID:
+                    type: string
+                type: object
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []
