@@ -71,6 +71,86 @@ rules:
 - apiGroups:
   - ec2.services.k8s.aws
   resources:
+  - launchtemplates
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - ec2.services.k8s.aws
+  resources:
+  - launchtemplates/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - ec2.services.k8s.aws
+  resources:
+  - launchtemplateversions
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - ec2.services.k8s.aws
+  resources:
+  - launchtemplateversions/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - ec2.services.k8s.aws
+  resources:
+  - natgateways
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - ec2.services.k8s.aws
+  resources:
+  - natgateways/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - ec2.services.k8s.aws
+  resources:
+  - networkacls
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - ec2.services.k8s.aws
+  resources:
+  - networkacls/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - ec2.services.k8s.aws
+  resources:
   - routetables
   verbs:
   - create
@@ -164,6 +244,26 @@ rules:
   - ec2.services.k8s.aws
   resources:
   - vpcendpoints/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - ec2.services.k8s.aws
+  resources:
+  - vpcendpointserviceconfigurations
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - ec2.services.k8s.aws
+  resources:
+  - vpcendpointserviceconfigurations/status
   verbs:
   - get
   - patch

@@ -11,12 +11,17 @@ rules:
   resources:
   - dhcpoptions
   - internetgateways
+  - launchtemplates
+  - launchtemplateversions
+  - natgateways
+  - networkacls
   - routetables
   - securitygroups
   - subnets
   - transitgateways
   - vpcs
   - vpcendpoints
+  - vpcendpointserviceconfigurations
   verbs:
   - get
   - list
