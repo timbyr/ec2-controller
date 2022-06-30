@@ -16,6 +16,7 @@ ignore:
     - CreateTransitGatewayInput.DryRun
     - CreateVpcInput.DryRun
     - CreateVpcEndpointInput.DryRun
+    - CreateVpcEndpointServiceConfigurationInput.DryRun
     - DeleteRouteInput.DryRun
     - DeleteRouteInput.RouteTableId
     # support EC2-VPC only
@@ -81,7 +82,7 @@ ignore:
     #- TransitGateway
     - Volume
     - VpcEndpointConnectionNotification
-    - VpcEndpointServiceConfiguration
+    # - VpcEndpointServiceConfiguration
     #- VpcEndpoint
     #- Vpc
     - VpcCidrBlock
@@ -325,3 +326,10 @@ resources:
     hooks:
       sdk_delete_post_build_request:
         template_path: hooks/vpc_endpoint/sdk_delete_post_build_request.go.tpl
+  VpcEndpointServiceConfiguration:
+    is_arn_primary_key: true
+    fields:
+      AllowedPrincipals:
+        from:
+          operation: ModifyVpcEndpointServicePermissions
+          path: AddAllowedPrincipals

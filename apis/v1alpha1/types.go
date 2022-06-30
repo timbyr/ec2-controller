@@ -2464,6 +2464,7 @@ type PrivateDNSDetails struct {
 // in the Amazon Virtual Private Cloud User Guide.
 type PrivateDNSNameConfiguration struct {
 	Name  *string `json:"name,omitempty"`
+	State *string `json:"state,omitempty"`
 	Type  *string `json:"type_,omitempty"`
 	Value *string `json:"value,omitempty"`
 }
@@ -2954,23 +2955,37 @@ type ServiceConfiguration struct {
 	ManagesVPCEndpoints     *bool     `json:"managesVPCEndpoints,omitempty"`
 	NetworkLoadBalancerARNs []*string `json:"networkLoadBalancerARNs,omitempty"`
 	PrivateDNSName          *string   `json:"privateDNSName,omitempty"`
-	ServiceID               *string   `json:"serviceID,omitempty"`
-	ServiceName             *string   `json:"serviceName,omitempty"`
-	Tags                    []*Tag    `json:"tags,omitempty"`
+	// Information about the private DNS name for the service endpoint. For more
+	// information about these parameters, see VPC Endpoint Service Private DNS
+	// Name Verification (https://docs.aws.amazon.com/vpc/latest/userguide/ndpoint-services-dns-validation.html)
+	// in the Amazon Virtual Private Cloud User Guide.
+	PrivateDNSNameConfiguration *PrivateDNSNameConfiguration `json:"privateDNSNameConfiguration,omitempty"`
+	ServiceID                   *string                      `json:"serviceID,omitempty"`
+	ServiceName                 *string                      `json:"serviceName,omitempty"`
+	ServiceState                *string                      `json:"serviceState,omitempty"`
+	ServiceType                 []*ServiceTypeDetail         `json:"serviceType,omitempty"`
+	Tags                        []*Tag                       `json:"tags,omitempty"`
 }
 
 // Describes a VPC endpoint service.
 type ServiceDetail struct {
-	AcceptanceRequired         *bool     `json:"acceptanceRequired,omitempty"`
-	AvailabilityZones          []*string `json:"availabilityZones,omitempty"`
-	BaseEndpointDNSNames       []*string `json:"baseEndpointDNSNames,omitempty"`
-	ManagesVPCEndpoints        *bool     `json:"managesVPCEndpoints,omitempty"`
-	Owner                      *string   `json:"owner,omitempty"`
-	PrivateDNSName             *string   `json:"privateDNSName,omitempty"`
-	ServiceID                  *string   `json:"serviceID,omitempty"`
-	ServiceName                *string   `json:"serviceName,omitempty"`
-	Tags                       []*Tag    `json:"tags,omitempty"`
-	VPCEndpointPolicySupported *bool     `json:"vpcEndpointPolicySupported,omitempty"`
+	AcceptanceRequired              *bool                `json:"acceptanceRequired,omitempty"`
+	AvailabilityZones               []*string            `json:"availabilityZones,omitempty"`
+	BaseEndpointDNSNames            []*string            `json:"baseEndpointDNSNames,omitempty"`
+	ManagesVPCEndpoints             *bool                `json:"managesVPCEndpoints,omitempty"`
+	Owner                           *string              `json:"owner,omitempty"`
+	PrivateDNSName                  *string              `json:"privateDNSName,omitempty"`
+	PrivateDNSNameVerificationState *string              `json:"privateDNSNameVerificationState,omitempty"`
+	ServiceID                       *string              `json:"serviceID,omitempty"`
+	ServiceName                     *string              `json:"serviceName,omitempty"`
+	ServiceType                     []*ServiceTypeDetail `json:"serviceType,omitempty"`
+	Tags                            []*Tag               `json:"tags,omitempty"`
+	VPCEndpointPolicySupported      *bool                `json:"vpcEndpointPolicySupported,omitempty"`
+}
+
+// Describes the type of service for a VPC endpoint.
+type ServiceTypeDetail struct {
+	ServiceType *string `json:"serviceType,omitempty"`
 }
 
 // Describes the time period for a Scheduled Instance to start its first schedule.
